@@ -24,16 +24,11 @@ const scrapeMetatags = (text) => {
 async function start() {
     const browser = await puppeteer.launch({
 			// headless: false,
-			// args: [
-			// 	'--allow-external-pages',
-			// 	'--allow-third-party-modules',
-			// 	'--data-reduction-proxy-http-proxies',
-			// 	'--no-sandbox'
-			// ]
+		
 		}) //open brower
     const page = await browser.newPage() //go to new page in browser
-    await page.goto("https://learnwebcode.github.io/practice-requests/") //got to desire website
-    // await page.screenshot({path:"amazin.png"})
+    await page.goto("https://learnwebcode.github.io/practice-requests/") //go to desire website url
+    // await page.screenshot({path:"amazin.png"}) take screen short
     // const names = ['1asd', 2, 3]
     
 
@@ -43,7 +38,7 @@ async function start() {
     })
     await fs.writeFile("names.txt", names.join("\r\n"))
     const photos = await page.$$eval('img', (imgs) => {
-        return imgs.map(x => x.src)
+        return imgs.map(x => x.src) //extract images source urls
     })
     await page.click('#clickme')
     const clickedData = await page.$eval('#data', el => el.textContent)
@@ -62,4 +57,5 @@ console.log(info);
     }
     await browser.close()
 }
+
 start()
