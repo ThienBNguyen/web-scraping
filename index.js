@@ -57,5 +57,34 @@ console.log(info);
     }
     await browser.close()
 }
+const main = async () => {
+    const url = 'https://books.toscrape.com/'
+    const browser = await puppeteer.launch({headless:true})
+    const page = await browser.newPage()
+    await page.goto(url)
+    const bookData = await page.evaluate((url) => {
+        const convertPrice = (price) =>{
+            return parseFloat(price.replace(''))
+        }
+        const bookpods = Array.from(document.querySelectorAll('.product_pod'))
+        const data = bookpods.map((book) =>({
+            tittle: book.querySelector('h3 a').getAttribute('title'),
+            price: book.querySelector('.price_color').innerText,
+            imgSrc: url + book.querySelector('img').getAttribute('src'),
+            ratting: book.querySelector('.star-rating').classList[1]
 
-start()
+        }))
+        return data
+    }, url)
+    // console.log(bookData);
+
+
+fs.writeFile('data.json', JSON.stringify(bookData), (err) => {
+    if(err) throw err 
+})
+    await browser.close()
+}
+const run = async () => {
+    await Promise.all([main(), start()])
+}
+run()
