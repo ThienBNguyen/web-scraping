@@ -87,4 +87,91 @@ fs.writeFile('data.json', JSON.stringify(bookData), (err) => {
 const run = async () => {
     await Promise.all([main(), start()])
 }
-run()
+// run()
+const users = [
+    {id: 1,
+    name:'jack',
+isActive: true},
+
+   {id: 2,
+    name:'thien',
+isActive: true},
+{id: 3,
+    name:'thai',
+isActive: false},
+{id: 4,
+    name:'binh',
+isActive: false},
+{id: 5,
+    name:'hieu',
+isActive: false},
+]
+let userNames = []
+users.map(user => {userNames.push(user.name)})
+// console.log(userNames);
+const names = []
+for (let i = 0; i < users.length; i++ ){
+    if( users[i].isActive === false){
+        names.push(users[i].name)
+    }
+}
+// console.log(names.sort((user1, user2) => (user1)));
+// using filter, sort, and map method
+const nameList = users.filter((user) => user.isActive  === false).map((user) => user.name).sort((user1, user2) => (user1.age < user2.age ? 1: -1))
+// console.log(nameList);
+// let var1;
+// console.log(var1);
+// console.log(typeof var1);
+// let var2 = null;
+// console.log(var2);
+// console.log(typeof var2);
+//hoisting
+//closure
+const privateCounter = () => {
+    let count = 0
+    return {
+        increment: (val = 1) =>{
+            count += val
+        },
+        getValue: () => {
+            return count;
+        }
+    }
+}
+// const counter = privateCounter()
+// console.log(counter.getValue());
+// counter.increment()
+// console.log(counter.getValue());
+function add(x){
+    return function(y){
+        return x + y
+    }
+}
+const addFive = add(5)
+// console.log(addFive(3));
+const append = (arr, el) => {
+    // arr.push(el)
+    return [...arr, el];
+}
+// console.log(append([1,2],5));
+
+const concatenate = (arr1,arr2) =>{
+    return [...arr1, ...arr2]
+}
+const result = concatenate([1], [2])
+// console.log(result);
+// const isNameExists = (name, arr) => arr.some((el) => el.name === name);
+const isNameExists = (name, arr) => {
+    const el = arr.find((el) => el.anem ===name)
+    return Boolean(el)
+}
+const uniqueArr = (arr) => {
+    const result = []
+    arr.forEach(item => {
+        if(!result.includes(item)){
+            result.push(item)
+        }
+    })
+    return result
+}
+console.log(uniqueArr([1,1,2,4,5]));

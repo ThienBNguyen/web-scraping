@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon index.js",
+    "devstart": "nodemon ./bin/www",
+    "serverstart": "DEBUG=express-locallibrary-tutorial:* npm run devstart"
   },
   "keywords": [],
   "author": "",
@@ -12,8 +14,10 @@
   "dependencies": {
     "cheerio": "^1.0.0-rc.12",
     "cors": "^2.8.5",
+    "daemon": "^1.1.0",
     "get-urls": "^11.0.0",
     "node-fetch": "^3.3.1",
+    "nodemon": "^2.0.22",
     "puppeteer": "^20.5.0"
   }
 }
