@@ -57,6 +57,17 @@ console.log(info);
     }
     await browser.close()
 }
+const ooshirts = async () => {
+    const url = 'https://www.ooshirts.com/designapp/'
+    const browser = await puppeteer.launch({headless: true})
+    const page = await browser.newPage()
+    await page.goto(url)
+    await page.screenshot({ path: 'screenshot.png' });
+    //  const names = await page.evaluate(() =>{
+    //    return Array.from(document.querySelectorAll(".info strong")).map(x => x.textContent)
+    // }) 
+      await browser.close();
+}
 const main = async () => {
     const url = 'https://books.toscrape.com/'
     const browser = await puppeteer.launch({headless:true})
@@ -174,4 +185,3 @@ const uniqueArr = (arr) => {
     })
     return result
 }
-console.log(uniqueArr([1,1,2,4,5]));
