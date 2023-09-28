@@ -70,7 +70,7 @@ async function clickIndividualLink() {
     await linkHandle.click();
 
     // Wait for a while (e.g., 1 second) to allow the page to load after clicking
-    await page.waitForTimeout(1000);
+    await page.waitForTimeout(10000);
 
     const backgroundImageUrl = await page.evaluate(() => {
       const section = document.querySelector("#canvas[style*='background-image']");
